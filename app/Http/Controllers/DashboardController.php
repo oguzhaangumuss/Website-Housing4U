@@ -1,25 +1,24 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    /**
-     * Kullanıcıyı uygun panele yönlendirin.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function index()
-    {
-        // Kullanıcı rolüne göre yönlendirme yapıyoruz
-        if (auth()->user()->role === 'admin') {
-            // Admin paneline yönlendir
-            return redirect()->route('admin.dashboard');
-        }
+   
+public function index()
+{
+    $user = Auth::user();
 
-        // Kullanıcı paneline yönlendir
+    if ($user->hasRole('admin')) {
+        return redirect()->route('admin.dashboard');
+    }
+
+    if ($user->hasRole('user')) {
         return redirect()->route('user.dashboard');
     }
+
+    return abort(403, 'Rolünüz tanımlanmadı');
+}
 }

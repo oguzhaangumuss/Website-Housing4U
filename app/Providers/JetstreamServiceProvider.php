@@ -24,9 +24,14 @@ class JetstreamServiceProvider extends ServiceProvider
     {
         $this->configurePermissions();
 
+        // Kullanıcı silme işlemi için Jetstream yapılandırması
         Jetstream::deleteUsersUsing(DeleteUser::class);
 
+        // Vite'yi yapılandırma (JavaScript ve CSS için önbellek)
         Vite::prefetch(concurrency: 3);
+
+        // Middleware alias kaydını burada yapıyoruz
+        $this->app['router']->aliasMiddleware('role', \App\Http\Middleware\RoleMiddleware::class);
     }
 
     /**
@@ -34,8 +39,10 @@ class JetstreamServiceProvider extends ServiceProvider
      */
     protected function configurePermissions(): void
     {
+        // API token izinleri
         Jetstream::defaultApiTokenPermissions(['read']);
 
+        // Jetstream izinleri
         Jetstream::permissions([
             'create',
             'read',

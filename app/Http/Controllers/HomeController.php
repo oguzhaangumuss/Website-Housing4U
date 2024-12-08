@@ -8,29 +8,57 @@ use App\Models\User;
 
 class HomeController extends Controller
 {
-    
-
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
-    {
-        if (auth()->user()->isAdmin()) {
-            return redirect()->route('admin.dashboard');
-        }
-    
-        return redirect()->route('user.dashboard');
+{
+    if (auth()->check()) {
+        return $this->redirectToDashboard();
     }
-    public function welcome() {
+
+    return redirect()->route('login');
+}
+
+    protected function redirectToDashboard()
+{
+    if (auth()->user()->isAdmin()) {
+        return redirect()->route('admin.dashboard');
+    }
+
+    return redirect()->route('user.dashboard');
+}
+
+
+    // Welcome sayfasını döndür
+    public function welcome()
+    {
         return view('welcome');
     }
-    public function about() {
+
+    // Hakkında sayfasını döndür
+    public function about()
+    {
         return view('about');
     }
-    public function services() {
+
+    // Hizmetler sayfasını döndür
+    public function services()
+    {
         return view('services');
     }
-    public function rooms() {
+
+    // Odalar sayfasını döndür
+    public function rooms()
+    {
         return view('rooms');
     }
-    public function contact() {
+
+    // İletişim sayfasını döndür
+    public function contact()
+    {
         return view('contact');
     }
 }
