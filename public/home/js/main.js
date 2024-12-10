@@ -78,8 +78,49 @@
             document.getElementById("navbar2").style.top = "-100px";
         }
     };
+    // profile carousel
+
+// Get the elements
+const avatarButton = document.getElementById("avatarButton");
+const userDropdown = document.getElementById("userDropdown");
+const butonMobile = document.getElementById("butonMobile");
+
+// Show/hide the dropdown menu when the avatar image is clicked
+avatarButton.addEventListener("click", function(event) {
+    // Prevent the click event from propagating to the document click listener
+    event.stopPropagation();
+
+    // Toggle visibility of the dropdown
+    if (userDropdown.style.display === "block") {
+        userDropdown.style.display = "none";
+    } else {
+        userDropdown.style.display = "block";
+    }
+    if (butonMobile.style.display === "block") {
+        butonMobile.style.display = "none";
+    } else {
+        butonMobile.style.display = "block";
+    }
+});
+
+// Close dropdown if clicked outside the avatar or dropdown
+window.addEventListener("click", function(event) {
+    if (!avatarButton.contains(event.target) && !userDropdown.contains(event.target)) {
+        userDropdown.style.display = "none";
+    }
+});
+
 
     
+    // profile carousel
+
+
+
+
+
+
+
+
     // Testimonials carousel
     $(".testimonial-carousel").owlCarousel({
         autoplay: true,

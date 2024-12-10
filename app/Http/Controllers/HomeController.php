@@ -14,23 +14,33 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-{
-    if (auth()->check()) {
-        return $this->redirectToDashboard();
+    {
+        // Kullanıcı giriş yaptıysa dashboard'a yönlendir
+        if (auth()->check()) {
+            return $this->redirectToDashboard();
+        }
+
+        // Kullanıcı giriş yapmamışsa login sayfasına yönlendir
+        return redirect()->route('login');
     }
 
-    return redirect()->route('login');
-}
-
+    /**
+     * Kullanıcıyı rolüne göre dashboard'a yönlendir
+     *
+     * @return \Illuminate\Http\Response
+     */
     protected function redirectToDashboard()
-{
-    if (auth()->user()->isAdmin()) {
-        return redirect()->route('admin.dashboard');
+    {
+        $user = auth()->user();
+
+        // Admin rolüne sahip kullanıcıyı admin dashboard'a yönlendir
+        if ($user->hasRole('admin')) {
+            return redirect()->route('admin.dashboard');
+        }
+
+        // Kullanıcı rolüne sahip kullanıcıyı user dashboard'a yönlendir
+        return redirect()->route('user.dashboard');
     }
-
-    return redirect()->route('user.dashboard');
-}
-
 
     // Welcome sayfasını döndür
     public function welcome()

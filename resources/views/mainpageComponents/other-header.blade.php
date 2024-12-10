@@ -8,14 +8,7 @@
         </div>
         <!-- Spinner End -->
          
-    <!-- Arka Plan Görüntüsü -->
-    <div class="background-container">
-        <img class="background-image" src="home/img/carousel-1.jpg" alt="Image">
-    </div>
 
-    <!-- Arka Plan ve İçerik -->
-    <div class="image-container position-relative">
-        <!-- Arka Plan Görüntüsü -->
         <!-- İçerik Katmanı -->
         <div class="content-layer position-relative" style="z-index:1;">
             <div class="container-fluid px-0">
@@ -41,15 +34,7 @@
                 </div>
 
                 <!-- Navbar -->
-                <nav class="navbar navbar-expand-lg navbar-dark p-3 mgr" >
-                    <a href="{{ url('welcome') }}" class="navbar-brand d-block d-lg-none ">
-                        <div class="col-lg-2  d-none d-lg-block additional-content">
-                    <a href="{{ url('welcome') }}" class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center">
-                    <img class="m-0"style="width: 8rem; height: 5rem;" src="home/img/favicon.png" alt="Housing4u Logo">
-                    </a>
-                </div>
-                    </a>   
-                    
+                <nav class="navbar navbar-expand-lg navbar-dark p-3" >
                     <nav class="navbar navbar-expand-lg navbar-light fixed-top w-100 bg-dark" id="navbar2">
     <div class="container">
         <!-- Navbar başlığı -->
@@ -60,8 +45,8 @@
    <!-- Navbar toggler (mobile-friendly menu button) -->
    @if (Route::has('login'))
    @auth
-   <button class="buton-mobile image-button" id="navbarToggler1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <img id="butonMobile" class="w-10 image-profile h-10 rounded-full cursor-pointer" src="home/img/favicon.png" style="height:4rem;width:4rem;border-radius:50%;" alt="User dropdown">
+<button class="buton-mobile image-button" id="navbarToggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <img   id="butonMobile" class="w-10 h-10  cursor-pointer" src="home/img/favicon.png" style="height:4rem;width:4rem;border-radius:50%;" alt="User dropdown">
 </button>
 
 
@@ -100,16 +85,14 @@
   </form>
 </li>
  
-    </ul></div>
-
+    </ul>
+    
 
                                 @else
+                                <div class="collapse navbar-collapse" id="navbarNav">
                                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-
-                      
                                 <ul class="navbar-nav align-items-center ms-auto">  
                 <li class="nav-item">
                     <a class="nav-link headitems text-white" href="{{ url('home') }}">Home</a>
@@ -132,53 +115,32 @@
                                 <li class="nav-item">
         <a href="{{  route('register') }}" class="nav-link headitems text-white">Register</a>
       </li> 
-      </ul></div>
-
+      </ul>
                                 @endif
                                 @endauth
                             @endif
-            
-    </nav>
-                    <div class=" navbar-collapse justify-content-between " id="">
-                        <ul class="navbar-nav mx-auto items-blur ">
-                            <li class="nav-item"><a href="{{ url('welcome') }}" class="nav-link active">Home</a></li>
-                            <li class="nav-item"><a href="{{ url('about') }}" class="nav-link">About</a></li>
-                            <li class="nav-item"><a href="{{ url('services') }}" class="nav-link">Services</a></li>
-                            <li class="nav-item"><a href="{{ url('rooms') }}" class="nav-link">Rooms</a></li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="booking.html" class="dropdown-item">Booking</a></li>
-                                    <li><a href="team.html" class="dropdown-item">Our Team</a></li>
-                                    <li><a href="testimonial.html" class="dropdown-item">Testimonial</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item"><a href="{{ url('contact') }}" class="nav-link">Contact</a></li>
-                        </ul>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-                        <!-- Login/Register Buttons -->
-                        @if (Route::has('login'))
-                                @auth
-                                <a href="{{ url('/dashboard') }}" class=" items-nonees image-button rounded-full">    <img   id="butonMobile" class="w-10 h-10 rounded-full cursor-pointer" src="home/img/favicon.png" style="height:4rem;width:4rem;border-radius:50%;" alt="User dropdown">
-                                </a>
-                       
-                           
-                                @else
-                                <div class="d-flex items-blur ">
-                                <ul class="navbar-nav mx-auto d-nonemobile">
-                                <li class="nav-item"><a href="{{  route('login') }}" class="nav-link">Log In</a></li>
-                                @if (Route::has('register'))
-                                <li class="nav-item"><a href="{{  route('register') }}" class="nav-link">Register</a></li>
-
-                                @endif
-                                @endauth
-                            @endif</ul>
-                        </div>
-
-                        
-                    </div>
+    <!-- Right Sidebar Toggle Menu -->
+    <div class="offcanvas offcanvas-end " tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header ">
+            <h5 id="offcanvasRightLabel">Menu</h5>
+            <button type="button" class="btn-close text-reset " data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="list-unstyled">
+                <li><a href="#" class="btn btn-light w-100 mb-3">Home</a></li>
+                <li><a href="#" class="btn btn-light w-100 mb-3">About</a></li>
+                <li><a href="#" class="btn btn-light w-100 mb-3">Services</a></li>
+                <li><a href="#" class="btn btn-light w-100 mb-3">Contact</a></li>
+            </ul>
+        </div>
+    </div>
                 </nav>
             </div>
-        </div>
+       
     </div>
 </div> 
