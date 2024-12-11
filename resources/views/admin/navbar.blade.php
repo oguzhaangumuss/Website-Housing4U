@@ -31,23 +31,7 @@
             class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom"
           >
             <div class="container-fluid">
-              <nav
-                class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex"
-              >
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <button type="submit" class="btn btn-search pe-1">
-                      <i class="fa fa-search search-icon"></i>
-                    </button>
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Search ..."
-                    class="form-control"
-                  />
-                </div>
-              </nav>
-
+       
               <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
                 <li
                   class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none"
@@ -184,7 +168,7 @@
                   >
                     <li>
                       <div class="dropdown-title">
-                        You have 4 new notification
+                        You have sell something
                       </div>
                     </li>
                     <li>
@@ -275,7 +259,7 @@
                               >
                                 <i class="fas fa-map"></i>
                               </div>
-                              <span class="text">Maps</span>
+                              <span class="text">Rent List</span>
                             </div>
                           </a>
                           <a class="col-6 col-md-4 p-0" href="#">
@@ -283,7 +267,7 @@
                               <div class="avatar-item bg-info rounded-circle">
                                 <i class="fas fa-file-excel"></i>
                               </div>
-                              <span class="text">Reports</span>
+                              <span class="text">Subs</span>
                             </div>
                           </a>
                           <a class="col-6 col-md-4 p-0" href="#">
@@ -303,7 +287,7 @@
                               >
                                 <i class="fas fa-file-invoice-dollar"></i>
                               </div>
-                              <span class="text">Invoice</span>
+                              <span class="text">Invoice(later)</span>
                             </div>
                           </a>
                           <a class="col-6 col-md-4 p-0" href="#">
@@ -313,7 +297,7 @@
                               >
                                 <i class="fas fa-credit-card"></i>
                               </div>
-                              <span class="text">Payments</span>
+                              <span class="text">Payments(later)</span>
                             </div>
                           </a>
                         </div>
@@ -359,8 +343,8 @@
                       </li>
                       <li>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{url('/redirect')}}">My Profile</a>
-                        <a class="dropdown-item" href="{{url('/userpage')}}">Website Main Menu</a>
+                        <a class="dropdown-item" href="{{url('/user/dashboard')}}">My Profile</a>
+                        <a class="dropdown-item" href="{{url('/welcome')}}">Website Main Menu</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

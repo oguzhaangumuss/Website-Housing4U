@@ -7,6 +7,7 @@
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       name="viewport"
     />
+    <base href="/public">
       <!-- Start Headinfo -->
       @include('admin.headinfo')
       <!-- End Headinfo -->
@@ -56,9 +57,6 @@
       <!-- Start Footer -->
       @include('admin.adminfooter')
       <!-- End Footer -->
-      <!-- Start Custom template -->
-      @include('admin.customtemplatesidebar')
-      <!-- End Custom template -->
       <!-- Start Scriptsrc codes -->
       @include('admin.infooutofproject')
       <!-- End Scriptsrc codes -->

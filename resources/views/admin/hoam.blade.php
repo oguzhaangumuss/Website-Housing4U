@@ -14,7 +14,7 @@
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
                           <p class="card-category">Total User</p>
-                          <h4 class="card-title">1,294</h4>
+                          <h4 class="card-title"></h4>
                         </div>
                       </div>
                     </div>
@@ -34,8 +34,8 @@
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category">Total Product</p>
-                          <h4 class="card-title">1303</h4>
+                          <p class="card-category">Total Empty Room</p>
+                          <h4 class="card-title"></h4>
                         </div>
                       </div>
                     </div>
@@ -57,7 +57,7 @@
                         <div class="numbers">
                           <p class="card-category">Total Order
                           </p>
-                          <h4 class="card-title">$ 1,345</h4>
+                          <h4 class="card-title">$ </h4>
                         </div>
                       </div>
                     </div>
@@ -77,8 +77,8 @@
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category">Total Sales</p>
-                          <h4 class="card-title">576</h4>
+                          <p class="card-category">Total Rent</p>
+                          <h4 class="card-title"></h4>
                         </div>
                       </div>
                     </div>

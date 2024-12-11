@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Category; // Doğru yazım
+use App\Models\Category; 
 use App\Models\Product;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -16,6 +17,13 @@ class AdminController extends Controller
         }
     
         return redirect()->route('user.dashboard');
+    }
+
+
+    public function getUsersCount()
+    {
+        $usersCount = User::count(); // Veritabanındaki tüm kullanıcıların sayısını alır
+        return view('admin.dashboard', compact('usersCount')); // Sayıyı bir view'e gönderir
     }
 
     // Kategorileri listeleme

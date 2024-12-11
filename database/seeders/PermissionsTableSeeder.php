@@ -15,6 +15,8 @@ class PermissionsTableSeeder extends Seeder
             'manage users',
             'view reports',
             'edit posts',
+            'delete posts',
+            'create posts'
         ];
 
         foreach ($permissions as $permission) {

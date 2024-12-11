@@ -57,3 +57,9 @@ Route::middleware('auth')->get('/logout', function () {
         return redirect()->route('dashboard');  // Diğer kullanıcıları genel dashboard'a yönlendir
     }
 })->name('logout');
+
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.dashboard');
+    
+    Route::get('/admin/users/count', [AdminController::class, 'getUsersCount'])->name('admin.users.count');
