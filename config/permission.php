@@ -2,6 +2,12 @@
 
 return [
 
+
+'middleware' => [
+    'role' => Spatie\Permission\Middlewares\RoleMiddleware::class,
+    'role_or_permission' => Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
+],
+
     'models' => [
 
         'permission' => Spatie\Permission\Models\Permission::class,
@@ -37,7 +43,7 @@ return [
     'cache' => [
         'expiration_time' => \DateInterval::createFromDateString('24 hours'),
         'key' => 'spatie.permission.cache',
-        'store' => 'default', // Specify the cache driver
+        'store' => 'file', // Specify the cache driver
     ],
 
 ];

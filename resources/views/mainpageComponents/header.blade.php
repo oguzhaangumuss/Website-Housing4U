@@ -61,7 +61,7 @@
    @if (Route::has('login'))
    @auth
    <button class="buton-mobile image-button" id="navbarToggler1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <img id="butonMobile" class="w-10 image-profile h-10 rounded-full cursor-pointer" src="home/img/favicon.png" style="height:4rem;width:4rem;border-radius:50%;" alt="User dropdown">
+    <img id="butonMobile" class="w-10 image-profile h-10 rounded-full cursor-pointer" src="{{Auth::user()->profile_photo_url}}" style="height:4rem;width:4rem;border-radius:50%;" alt="User dropdown">
 </button>
 
 

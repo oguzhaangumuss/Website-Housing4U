@@ -74,7 +74,11 @@ return new class extends Migration
             }
 
         });
-
+               Schema::create('role_user', function (Blueprint $table) {
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('role_id')->constrained()->onDelete('cascade');
+            $table->primary(['user_id', 'role_id']);
+        });
         Schema::create($tableNames['model_has_roles'], function (Blueprint $table) use ($tableNames, $columnNames, $pivotRole, $teams) {
             $table->unsignedBigInteger($pivotRole);
 

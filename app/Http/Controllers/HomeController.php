@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -39,7 +38,12 @@ class HomeController extends Controller
         }
 
         // Kullanıcı rolüne sahip kullanıcıyı user dashboard'a yönlendir
-        return redirect()->route('user.dashboard');
+        if ($user->hasRole('user')) {
+            return redirect()->route('user.dashboard');
+        }
+
+        // Tanımlanmamış bir rol varsa 403 hatası döndür
+        return abort(403, 'Rolünüz tanimlanmadi');
     }
 
     // Welcome sayfasını döndür
@@ -47,7 +51,10 @@ class HomeController extends Controller
     {
         return view('welcome');
     }
-
+    public function profilesettings()
+    {
+        return view('profile-settings');
+    }
     // Hakkında sayfasını döndür
     public function about()
     {

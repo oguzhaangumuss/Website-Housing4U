@@ -75,7 +75,7 @@
             document.getElementById("navbar2").style.top = "0";
         } else {
             // Kaydırma 100px'nin altına indiğinde navbar'ı gizle
-            document.getElementById("navbar2").style.top = "-100px";
+            document.getElementById("navbar2").style.top = "-300px";
         }
     };
     // profile carousel

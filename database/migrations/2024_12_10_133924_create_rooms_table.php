@@ -18,6 +18,9 @@ class CreateRoomsTable extends Migration
             $table->string('name');  // Odanın adı
             $table->text('description');  // Odanın açıklaması
             $table->decimal('price', 10, 2);  // Odanın fiyatı (örneğin: 100.00)
+            $table->decimal('key_price', 10, 2)->nullable(); 
+            $table->decimal('service_fee', 10, 2)->nullable(); 
+            $table->decimal('rent_price', 10, 2)->nullable(); // Anahtar ücreti
             $table->string('location');  // Odanın konumu (adres)
             $table->date('available_from');  // Odanın kullanılabilir olduğu tarih
             $table->date('available_until');  // Odanın kullanılabilir olduğu bitiş tarihi

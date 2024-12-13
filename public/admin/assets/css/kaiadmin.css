@@ -299,7 +299,77 @@ body {
 
 .pull-left {
   float: left; }
+/* Alt kaydırma çubuğu için stil */
+.scrollbar-container {
+  width: 100%;
+  overflow-x: auto; /* Yatay kaydırma */
+  overflow-y: hidden; /* Dikey kaydırma gizlenir */
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
+/* Kaydırma çubuğu stilleri */
+.scrollbar-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scrollbar-container::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+
+.scrollbar-container::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.scrollbar-container::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-bottom: 30px;
+}
+
+table {
+  width: 100%;
+  min-width: 1500px;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: center;
+  padding: 12px 15px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.table-container {
+  width: 100%;
+  overflow-x: auto; /* Yatay kaydırma */
+  margin-bottom: 30px;
+  position: relative; /* Kaydırma işlemi için konumlandırma */
+}
+
+
+.scrollbar-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scrollbar-container::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+
+.scrollbar-container::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.scrollbar-container::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
 .wrapper {
   min-height: 100vh;
   position: relative;
