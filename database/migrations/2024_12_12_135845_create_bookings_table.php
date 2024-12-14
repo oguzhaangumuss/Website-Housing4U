@@ -14,16 +14,24 @@ class CreateBookingsTable extends Migration
     public function up()
     {
         Schema::create('bookings', function (Blueprint $table) {
-            $table->id(); // Kiralama için benzersiz ID
-            $table->foreignId('room_id')->constrained()->onDelete('cascade'); // Odaya ait ID, odanın silinmesi durumunda booking de silinsin
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Kullanıcıya ait ID, kullanıcı silinirse booking de silinsin
-            $table->date('available_from'); // Kiralamanın başlama tarihi
-            $table->date('available_until'); // Kiralamanın bitiş tarihi
-            $table->string('status')->default('pending'); // Kiralamanın durumu (pending, booked, completed vb.)
-            $table->decimal('total_payment', 10, 2); // Oda için toplam ödeme tutarı
-            $table->decimal('paid_amount', 10, 2)->default(0); // Ödenen miktar
-            $table->decimal('remaining_amount', 10, 2); // Kalan ödeme tutarı
-            $table->timestamps(); // Created at ve Updated at tarihleri
+            $table->id();
+            $table->unsignedBigInteger('room_id');
+            $table->unsignedBigInteger('user_id');
+            $table->string('name');
+            $table->text('description');
+            $table->decimal('key_price', 8, 2);
+            $table->decimal('service_fee', 8, 2);
+            $table->decimal('rent_price', 8, 2);
+            $table->decimal('price', 8, 2);
+            $table->date('available_from');
+            $table->date('available_until');
+            $table->enum('status', ['available', 'booked', 'under_maintenance']);
+            $table->enum('payment_status', ['Payment Pending', 'Payment Completed', 'Payment Cancel']);
+            $table->timestamps();
+        
+            // İlişkiler
+            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

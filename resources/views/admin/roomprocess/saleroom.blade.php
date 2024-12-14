@@ -98,78 +98,71 @@ th, td {
       @include('admin.infosection')
       <!-- End Info Section -->
       <div class="container">
-        <h1 class="mb-4">Room Bookings - Monthly View</h1>
+    <h1 class="mb-4">Room Bookings - Monthly View</h1>
 
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
-        <!-- Datepicker for selecting a month -->
-        <form action="{{ route('admin.roomprocess.saleroom') }}" method="GET" class="mb-4">
-            <label for="month" class="form-label">Select Month:</label>
-            <input type="month" id="month" name="month" value="{{ request()->get('month', \Carbon\Carbon::now()->format('Y-m')) }}" class="form-control">
-            <button type="submit" class="btn btn-primary mt-2">Show</button>
-        </form>
+    <!-- Datepicker for selecting a month -->
+    <form action="{{ route('admin.roomprocess.saleroom') }}" method="GET" class="mb-4">
+        <label for="month" class="form-label">Select Month:</label>
+        <input type="month" id="month" name="month" value="{{ request()->get('month', \Carbon\Carbon::now()->format('Y-m')) }}" class="form-control">
+        <button type="submit" class="btn btn-primary mt-2">Show</button>
+    </form>
 
-        <div class="table-container">
+    <div class="table-container">
         <table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Room Name</th>
-            @foreach ($dates as $date)
-                <th>{{ \Carbon\Carbon::parse($date)->format('j M Y') }}</th>
-            @endforeach
-        </tr>
-    </thead>
-    <tbody>
-    @foreach ($rooms as $room)
-    <tr>
-        <td>{{ $room->name }}</td>
-        @foreach ($dates as $date)
-            <td>
-                @php
-                    // O tarihe ait rezervasyonu kontrol et
-                    $booking = $room->bookings->first(function ($booking) use ($date) {
-                        return $date >= $booking->available_from && $date <= $booking->available_until;
-                    });
-                @endphp
-                @if ($booking)
-    @if ($booking->status == 'booked')
-        <span class="badge badge-success">Booked</span>
-    @elseif ($booking->status == 'under_maintenance')
-        <span class="badge badge-warning">Under Maintenance</span>
-    @else
-        <span class="badge badge-secondary">Available</span>
-    @endif
-    
-    <!-- Ödeme durumu -->
-    @if ($booking->payment_status == 'completed')
-        <span class="badge badge-info">Payment Completed</span>
-    @elseif ($booking->payment_status == 'pending')
-        <span class="badge badge-warning">Payment Pending</span>
-    @endif
-@else
-    <span class="badge badge-secondary">Available</span>
-@endif
-            </td>
-        @endforeach
-    </tr>
-@endforeach
+            <thead>
+                <tr>
+                    <th>Room Name</th>
+                    @foreach ($dates as $date)
+                        <th>{{ \Carbon\Carbon::parse($date)->format('j M Y') }}</th>
+                    @endforeach
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($rooms as $room)
+                    <tr>
+                        <td>{{ $room->name }}</td>
+                        @foreach ($dates as $date)
+                            <td>
+                                @php
+                                    // O tarihe ait rezervasyonu kontrol et
+                                    $booking = $room->bookings->first(function ($booking) use ($date) {
+                                        return $date >= $booking->available_from && $date <= $booking->available_until;
+                                    });
+                                @endphp
+                                @if ($booking)
+                                    @if ($booking->status == 'booked')
+                                        <span class="badge badge-success">Booked</span>
+                                    @elseif ($booking->status == 'under_maintenance')
+                                        <span class="badge badge-warning">Under Maintenance</span>
+                                    @else
+                                        <span class="badge badge-secondary">Available</span>
+                                    @endif
+                                @else
+                                    <span class="badge badge-secondary">Available</span>
+                                @endif
+                            </td>
+                        @endforeach
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 
-</tbody>
-</table>
+    <!-- Alt Kaydırma Çubuğu -->
+    <div class="scrollbar-container" id="scroll-container">
+        <div style="width: 3000px;"></div> <!-- Kaydırma çubuğunun görünmesini sağlamak için geniş bir div ekliyoruz -->
+    </div>
+
+    <!-- Pagination if necessary -->
+    {{ $rooms->links() }}
 </div>
 
-        <!-- Alt Kaydırma Çubuğu -->
-        <div class="scrollbar-container" id="scroll-container">
-            <div style="width: 3000px;"></div> <!-- Kaydırma çubuğunun görünmesini sağlamak için geniş bir div ekliyoruz -->
-        </div>
-
-        <!-- Pagination if necessary -->
-{{ $rooms->links() }}
-    </div>
     <!-- Start Footer -->
     @include('admin.adminfooter')
       <!-- End Footer -->

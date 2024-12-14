@@ -7,13 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Booking extends Model
 {
     use HasFactory;
+    protected $table = 'bookings';
 
     protected $fillable = [
-        'room_id',
-        'user_id',   // Kim rezervasyonu yaptı
-        'available_from',
-        'available_until',
-        'status'
+        'room_id', 'user_id', 'name', 'description', 'key_price', 
+        'service_fee', 'rent_price', 'price', 'available_from', 
+        'available_until', 'status' , 'payment_status',
     ];
 
     // Bir rezervasyon bir odaya aittir
@@ -21,8 +20,13 @@ class Booking extends Model
     {
         return $this->belongsTo(Room::class);
     }
-    public function payments()
-    {
-        return $this->hasMany(Payment::class);
-    }
+    public function user()
+{
+    return $this->belongsTo(User::class);
+}
+public function payment()
+{
+    return $this->hasOne(Payment::class);
+}
+
 }

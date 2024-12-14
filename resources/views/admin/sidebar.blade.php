@@ -25,8 +25,7 @@
             <div class="sidebar-content">
                 <ul class="nav nav-secondary">
                     <li class="nav-item active">
-                        <a data-bs-toggle="collapse" href="" class="collapsed"
-                            aria-expanded="false">
+                        <a  href="{{ route('admin.dashboard') }}" class="collapsed">
                             <i class="fas fa-home"></i>
                             <p>Main Page</p>
                         </a>
@@ -42,7 +41,7 @@
                             <ul class="nav nav-collapse">
                                 <li>
                                     <a href="{{ route('admin.roomprocess.addsaleroom') }}">
-                                        <span class="sub-item">Add New Room</span>
+                                        <span class="sub-item">Add Room To The Ad</span>
                                     </a>
                                 </li>
                                 <li>
@@ -58,6 +57,16 @@
                                 <li>
                                     <a href="{{ route('admin.roomprocess.createtag') }}">
                                         <span class="sub-item">Tag Create</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.roomprocess.booked') }}">
+                                        <span class="sub-item">Rezervations or room controls</span>
+                                    </a>
+                                </li> 
+                                <li>
+                                    <a href="{{ route('admin.paymentdetails.index') }}">
+                                        <span class="sub-item">Payment Process</span>
                                     </a>
                                 </li>
                             </ul>
@@ -114,13 +123,13 @@
                         <div class="collapse" id="maps">
                             <ul class="nav nav-collapse">
                                 <li>
-                                    <a href="maps/googlemaps.html">
-                                        <span class="sub-item">Google Maps</span>
+                                    <a href="{{ route('admin.blog.create') }}">
+                                        <span class="sub-item">Create Blog</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="maps/jsvectormap.html">
-                                        <span class="sub-item">Jsvectormap</span>
+                                    <a href="{{ route('admin.blog.index') }}">
+                                        <span class="sub-item">All Blogs</span>
                                     </a>
                                 </li>
                             </ul>
@@ -155,10 +164,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="../../documentation/index.html">
+                        <a href="{{ route('admin.contact_info.index') }}">
                             <i class="fas fa-file"></i>
                             <p>Social Media and other links</p>
-                            <span class="badge badge-secondary">1</span>
                         </a>
                     </li>
                     <li class="nav-item">

@@ -20,6 +20,6 @@ class TagController extends Controller
 
         Tag::create($request->all());
 
-        return redirect()->route('admin.roomprocess.showroom')->with('success', 'Tag created successfully!');
+        return redirect()->route('admin.roomprocess.createtag')->with('success', 'Tag created successfully!');
     }
 }

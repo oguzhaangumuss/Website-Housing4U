@@ -8,6 +8,10 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserStatController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ContactInfoController;
 
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 // Ana sayfa
@@ -38,14 +42,44 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
             Route::get('/saleroom', [RoomController::class, 'saleroom'])->name('saleroom');
 
             // Diğer oda yönetimi rotaları
-           Route::get('/showroom', [RoomController::class, 'showroom'])->name('showroom');
+            Route::get('/showroom', [RoomController::class, 'showroom'])->name('showroom');
             Route::get('/addsaleroom', [RoomController::class, 'showAddRoomForm'])->name('addsaleroom');
             Route::post('/addsaleroom', [RoomController::class, 'storeRoom'])->name('storeRoom');
             Route::get('/editroom/{id}', [RoomController::class, 'editRoom'])->name('editroom');
-            Route::post('/editroom/{id}', [RoomController::class, 'updateRoom'])->name('updateRoom');
-            Route::delete('/deleteroom/{id}', [RoomController::class, 'deleteRoom'])->name('deleteroom');
+            Route::put('/editroom/{id}', [RoomController::class, 'updateRoom'])->name('updateRoom');
+            Route::delete('/deleteroom/{id}', [RoomController::class, 'deleteRoom'])->name('deleteroom'); // Eklendi
             Route::get('/create-tag', [TagController::class, 'create'])->name('createtag');
+            Route::get('/booked', [BookingController::class, 'booked'])->name('booked');
+            Route::post('/booking-form', [BookingController::class, 'booked'])->name('booking-form');
+            Route::post('/createbooked', [BookingController::class, 'createbooked'])->name('create-booked');
             Route::post('/store-tag', [TagController::class, 'store'])->name('storetag');
+            Route::post('/photo/delete', [RoomController::class, 'deletePhoto'])->name('photo.delete');
+
+        });
+        Route::prefix('paymentdetails')->name('paymentdetails.')->group(function () {
+            // Ödeme işlemleri sayfası
+            Route::get('/', [PaymentController::class, 'index'])->name('index');
+
+            // Ödeme detaylarını düzenlemek için
+            Route::get('details/{bookingId}', [PaymentController::class, 'details'])->name('details');
+
+            // Ödeme güncelleme işlemi
+            Route::post('process/{bookingId}', [PaymentController::class, 'processPayment'])->name('payment.process');
+        });
+        //blog yönetimi
+        Route::prefix('blog')->name('blog.')->group(function () {
+            Route::get('/', [BlogController::class, 'index'])->name('index');
+            Route::get('/create', [BlogController::class, 'create'])->name('create');
+            Route::post('/', [BlogController::class, 'store'])->name('store');
+            Route::get('/{blog}', [BlogController::class, 'show'])->name('show');
+            Route::get('/{blog}/edit', [BlogController::class, 'edit'])->name('edit');
+            Route::put('/{blog}', [BlogController::class, 'update'])->name('update');
+            Route::delete('/{blog}', [BlogController::class, 'destroy'])->name('destroy');
+        });
+        Route::prefix('contact_info')->name('contact_info.')->group(function () {
+            Route::get('/index', [ContactInfoController::class, 'index'])->name('index');
+            Route::get('/edit', [ContactInfoController::class, 'edit'])->name('edit'); // Düzenleme sayfası
+            Route::post('/update', [ContactInfoController::class, 'update'])->name('update'); // Güncelleme işlemi
         });
 
         // Kullanıcı yönetimi

@@ -32,7 +32,7 @@ class Room extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'room_tag', 'room_id', 'tag_id');
+        return $this->belongsToMany(Tag::class);
     }
 
     public function photos()

@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Admin Panel - View All Rooms</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
     <base href="/public">
     <!-- Start Headinfo -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet" />
+
     @include('admin.headinfo')
     <!-- End Headinfo -->
 </head>
+
 <body>
     <!-- Start Sidebar -->
     @include('admin.sidebar')
@@ -22,10 +26,10 @@
     @include('admin.infosection')
     <!-- End Info Section -->
 
-   
+
     <div class="container mt-5">
         <h2 class="mb-4">All Rooms</h2>
-        
+
         <!-- Success Message -->
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
@@ -60,23 +64,27 @@
                         <!-- Display associated photos -->
                         <td>
                             @foreach ($room->photos as $photo)
-                                <a href="{{ asset('storage/' . $photo->path) }}" data-lightbox="room-{{ $room->id }}" data-title="Room Photo">
-                                    <img src="{{ asset('storage/' . $photo->path) }}" alt="Room Photo" class="img-thumbnail" style="width: 50px; height: 50px; margin-right: 5px;">
+                                <a href="{{ asset('storage/' . $photo->path) }}" data-lightbox="room-{{ $room->id }}"
+                                    data-title="Room Photo">
+                                    <img src="{{ asset('storage/' . $photo->path) }}" alt="Room Photo" class="img-thumbnail"
+                                        style="width: 50px; height: 50px; margin-right: 5px;">
                                 </a>
                             @endforeach
                         </td>
-
                         <td>{{ ucfirst($room->status) }}</td>
                         <td>{{ $room->available_from }}</td>
                         <td>{{ $room->available_until }}</td>
                         <td>
-                            <a href="{{ route('admin.roomprocess.editroom', $room->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="{{ route('admin.roomprocess.deleteroom', $room->id) }}" method="POST" style="display:inline;">
+                            <a href="{{ route('admin.roomprocess.editroom', $room->id) }}"
+                                class="btn btn-warning btn-sm">Edit</a>
+                            <form action="{{ route('admin.roomprocess.deleteroom', $room->id) }}" method="POST"
+                                style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                                <button type="submit" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Are you sure?')">Delete</button>
                             </form>
-                            
+
                         </td>
                     </tr>
                 @endforeach
@@ -93,10 +101,20 @@
     <!-- Start Footer -->
     @include('admin.adminfooter')
     <!-- End Footer -->
-
+    <script>
+        // Optional: You can add custom initialization for lightbox if necessary
+        lightbox.option({
+            'wrapAround': true,  // This ensures that after the last image, the gallery loops back to the first
+            'resizeDuration': 200,
+            'fadeDuration': 200,
+            'imageFadeDuration': 200
+        });
+    </script>
     <!-- Start Scriptsrc codes -->
     @include('admin.infooutofproject')
-    <!-- End Scriptsrc codes -->    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <!-- End Scriptsrc codes -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 
 </body>
+
 </html>

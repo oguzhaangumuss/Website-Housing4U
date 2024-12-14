@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Traits\HasRoles;
+
 
 class UserStatController extends Controller
 {
+    use HasRoles;
     public function index()
     {
         // Kullanıcıları sayfalı olarak almak için paginate() kullanıyoruz
@@ -22,7 +25,10 @@ class UserStatController extends Controller
     {
         return view('admin.userprocess.show', compact('user'));
     }
-
+    public function create()
+    {
+        return view('admin.userprocess.create' );
+    }
     // Kullanıcıyı düzenleme formu
     public function edit(User $user)
     {
@@ -54,24 +60,31 @@ class UserStatController extends Controller
         return redirect()->route('admin.userprocess.index')->with('success', 'User deleted successfully!');  // 'users.index' yerine 'admin.userprocess.index' kullanılmalı
     }
 
-public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:users,email',
-        'role' => 'required|exists:roles,name',
-        'password' => 'required|string|min:8|confirmed',
-    ]);
-
-    $user = new User();
-    $user->name = $request->name;
-    $user->email = $request->email;
-    $user->password = bcrypt($request->password);  // Şifreyi şifrele
-    $user->save();
-
-    // Kullanıcıya rol atama
-    $user->assignRole($request->role);
-
-    return redirect()->route('admin.userprocess.index')->with('success', 'User created successfully!');
-}
+    public function store(Request $request)
+    {
+        try {
+            // Validate the request
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|string|min:8|confirmed',
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Return back with errors if validation fails
+            return redirect()->back()->withErrors($e->errors())->withInput();
+        }
+    
+        // Create a new user
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);  // Encrypt the password
+        $user->save();
+    
+        // Assign the default 'user' role
+        $user->assignRole('user');  // This will assign the "user" role to the created user
+    
+        // Redirect back with success message
+        return redirect()->route('admin.userprocess.index')->with('success', 'User created successfully!');
+    }
 }
