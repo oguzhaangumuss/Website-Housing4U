@@ -28,7 +28,8 @@
           </div>
           <!-- Navbar Header -->
           <nav
-            class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom"
+            class="navbar navbar-header navbar-expand-lg border-bottom"
+            data-background-color="dark2"
           >
             <div class="container-fluid">
        

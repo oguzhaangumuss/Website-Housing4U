@@ -1,3 +1,11 @@
+<!-- 
+-----------------------------------------------------------------------
+    Tekrar kullanılabilir bir bileşen (component)
+    Menü öğelerinin stilini ve davranışını standardize eder
+    Active durumu yönetimi sağlar  
+-----------------------------------------------------------------------
+-->
+
 @props(['active'])
 
 @php

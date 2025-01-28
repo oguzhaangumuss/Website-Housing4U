@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PermissionsTableSeeder::class, // İzinleri ve rolleri tanımlayan Seeder
             AdminUserSeeder::class,       // Admin kullanıcıyı oluşturan Seeder
+            RoomSeeder::class,
         ]);
     }
 }

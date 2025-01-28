@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Room;
 use App\Models\Tag;
+use App\Models\Booking;
 use App\Models\Photo;
 use App\Http\Requests\UpdateRoomRequest;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class RoomController extends Controller
 {
@@ -209,5 +211,51 @@ class RoomController extends Controller
             return response()->json(['message' => 'There was an error deleting the photos.'], 500);
         }
     }
-    
+    // HomeController.php veya ilgili Controller
+public function rooms()
+{
+    // Tüm odaları al
+    $rooms = Room::all();
+
+    // Veriyi view'a gönder
+    return view('welcome', compact('rooms'));
+}
+public function show($id)
+{
+    // Odanın verilerini id ile alıyoruz
+    $room = Room::findOrFail($id);
+
+    // Odayı room.details blade dosyasına gönderiyoruz
+    return view('rooms.details', compact('room'));
+}
+public function book($id)
+{
+    $room = Room::findOrFail($id);
+    return view('rooms.book', compact('room'));
+}
+
+// Rezervasyon işlemini kaydet
+public function storeBooking(Request $request, $id)
+{
+    $room = Room::findOrFail($id);
+
+    // Form validasyonu
+    $request->validate([
+        'user_name' => 'required|string|max:255',
+        'check_in' => 'required|date|after_or_equal:today',
+        'check_out' => 'required|date|after:check_in',
+    ]);
+
+    // Rezervasyon kaydını oluştur
+    $booking = new Booking();
+    $booking->user_id = Auth::id();  // Kullanıcı kimliği
+    $booking->room_id = $room->id;
+    $booking->user_name = $request->user_name;
+    $booking->check_in = $request->check_in;
+    $booking->check_out = $request->check_out;
+    $booking->status = 'pending';  // Rezervasyon durumu
+    $booking->save();
+
+    return redirect()->route('room.details', $room->id)->with('success', 'Your booking has been successfully created!');
+}
 }

@@ -19,7 +19,8 @@ Route::get('/', [HomeController::class, 'welcome'])->name('home');
 Route::get('/profilesettings', [HomeController::class, 'profilesettings'])->name('profile-settings');
 
 // Statik sayfalar
-Route::view('/welcome', 'welcome');
+Route::get('/welcome', [HomeController::class, 'welcome'])->name('home');
+Route::get('/rooms', [App\Http\Controllers\Home\HomeController::class, 'rooms'])->name('rooms');
 
 // HomeController rotaları
 Route::get('/about', [HomeController::class, 'about']);
@@ -133,3 +134,9 @@ Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])
 
 // Admin kullanıcı sayısını alma
 Route::get('/admin/users/count', [AdminController::class, 'getUsersCount'])->name('admin.users.count');
+// routes/web.php
+
+
+Route::get('/room/{id}', [RoomController::class, 'show'])->name('room.details');
+Route::get('/room/{id}/book', [RoomController::class, 'book'])->name('room.book');
+Route::post('/room/{id}/book', [RoomController::class, 'storeBooking'])->name('room.storeBooking');

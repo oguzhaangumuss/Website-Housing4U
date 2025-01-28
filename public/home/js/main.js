@@ -81,25 +81,32 @@
     // profile carousel
 
 // Get the elements
-const avatarButton = document.getElementById("avatarButton");
-const userDropdown = document.getElementById("userDropdown");
-const butonMobile = document.getElementById("butonMobile");
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the elements
+    const avatarButton = document.getElementById("avatarButton");
+    const userDropdown = document.getElementById("userDropdown");
+    const butonMobile = document.getElementById("butonMobile");
 
-// Show/hide the dropdown menu when the avatar image is clicked
-avatarButton.addEventListener("click", function(event) {
-    // Prevent the click event from propagating to the document click listener
-    event.stopPropagation();
+    if (avatarButton && userDropdown && butonMobile) {
+        // Show/hide the dropdown menu when the avatar image is clicked
+        avatarButton.addEventListener("click", function(event) {
+            // Prevent the click event from propagating to the document click listener
+            event.stopPropagation();
 
-    // Toggle visibility of the dropdown
-    if (userDropdown.style.display === "block") {
-        userDropdown.style.display = "none";
+            // Toggle visibility of the dropdown
+            if (userDropdown.style.display === "block") {
+                userDropdown.style.display = "none";
+            } else {
+                userDropdown.style.display = "block";
+            }
+            if (butonMobile.style.display === "block") {
+                butonMobile.style.display = "none";
+            } else {
+                butonMobile.style.display = "block";
+            }
+        });
     } else {
-        userDropdown.style.display = "block";
-    }
-    if (butonMobile.style.display === "block") {
-        butonMobile.style.display = "none";
-    } else {
-        butonMobile.style.display = "block";
+        console.log("One or more elements were not found!");
     }
 });
 
@@ -118,7 +125,37 @@ window.addEventListener("click", function(event) {
 
 
 
-
+    const apiKey = 'YOUR_GOOGLE_API_KEY';  // Google API anahtarınızı buraya girin
+    const placeId = 'YOUR_PLACE_ID';  // Google Places ID'nizi buraya girin
+    
+    fetch(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&key=${apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            const reviews = data.result.reviews; // Yorumları çekiyoruz
+            displayReviews(reviews);  // Yorumları ekrana basıyoruz
+        })
+        .catch(error => console.error('Error fetching reviews:', error));
+    
+    function displayReviews(reviews) {
+        const testimonialContainer = document.querySelector('.owl-carousel');
+        reviews.forEach(review => {
+            const testimonialItem = document.createElement('div');
+            testimonialItem.classList.add('testimonial-item', 'position-relative', 'bg-white', 'rounded', 'overflow-hidden');
+            testimonialItem.innerHTML = `
+                <p>${review.text}</p>
+                <div class="d-flex align-items-center">
+                    <img class="img-fluid flex-shrink-0 rounded" src="${review.profile_photo_url}" style="width: 45px; height: 45px;">
+                    <div class="ps-3">
+                        <h6 class="fw-bold mb-1">${review.author_name}</h6>
+                        <small>${review.rating} stars</small>
+                    </div>
+                </div>
+                <i class="fa fa-quote-right fa-3x text-primary position-absolute end-0 bottom-0 me-4 mb-n1"></i>
+            `;
+            testimonialContainer.appendChild(testimonialItem);
+        });
+    }
+    
 
 
     // Testimonials carousel
@@ -142,4 +179,79 @@ window.addEventListener("click", function(event) {
             }
         }
     });
+
+    // Navbar scroll ve mobil menü yönetimi
+    document.addEventListener('DOMContentLoaded', function() {
+        const navbar = document.getElementById('mainNav');
+        const navbarToggler = document.getElementById('navbarToggler');
+        const navbarContent = document.getElementById('navbarContent');
+
+        // Scroll event listener
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) { // 50px scroll sonrası
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobil menü toggle
+        if (navbarToggler && navbarContent) {
+            navbarToggler.addEventListener('click', function() {
+                navbarContent.classList.toggle('show');
+            });
+
+            // Menü dışına tıklandığında menüyü kapat
+            document.addEventListener('click', function(event) {
+                const isClickInside = navbar.contains(event.target);
+                
+                if (!isClickInside && navbarContent.classList.contains('show')) {
+                    navbarContent.classList.remove('show');
+                }
+            });
+        }
+
+        // Sayfa yüklendiğinde scroll pozisyonunu kontrol et
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        }
+    });
+
+    // Navbar linklerinin active state yönetimi
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            navLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // Mobil görünümde menü öğelerine tıklandığında menüyü kapat
+    const mobileMenuItems = document.querySelectorAll('.navbar-nav .nav-link');
+    mobileMenuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const navbarContent = document.getElementById('navbarContent');
+            if (navbarContent.classList.contains('show')) {
+                navbarContent.classList.remove('show');
+            }
+        });
+    });
+
+    // Mobil menü toggle fonksiyonu
+    document.addEventListener('DOMContentLoaded', function() {
+        const navbarToggler = document.querySelector('.navbar-toggler');
+        const navbarCollapse = document.querySelector('.navbar-collapse');
+
+        navbarToggler.addEventListener('click', function() {
+            navbarCollapse.classList.toggle('show');
+        });
+
+        // Sayfa scroll olduğunda menüyü kapat
+        window.addEventListener('scroll', function() {
+            if(navbarCollapse.classList.contains('show')) {
+                navbarCollapse.classList.remove('show');
+            }
+        });
+    });
+
 })(jQuery);

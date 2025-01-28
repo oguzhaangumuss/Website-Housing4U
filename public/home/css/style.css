@@ -45,7 +45,7 @@
     border: 1px solid #6C48C5;
     border-radius:20px ;
     cursor: pointer;
-    background-color: #6C48C5;
+    background-color: #000000; /* Arka planı siyah yapar */
     color: #FFFFFF;
 }
 
@@ -244,18 +244,21 @@
     justify-content: center;
     text-align: center;
     background: #FFFFFF;
+    
     box-shadow: 0 0 45px rgba(0, 0, 0, .08);
     transition: .5s;
 }
+.service-item:hover{
+    transform: scale(1.05);
+    transition: all 0.3s ease;
 
-.service-item:hover {
-    background: var(--primary);
 }
+
 
 .service-item .service-icon {
     margin: 0 auto 30px auto;
-    width: 65px;
-    height: 65px;
+    width: 95px;
+    height: 95px;
     transition: .5s;
 }
 
@@ -268,7 +271,8 @@
 .service-item:hover i,
 .service-item:hover h5,
 .service-item:hover p {
-    color: #FFFFFF !important;
+
+
 }
 
 
@@ -485,7 +489,7 @@
 }
 
 .footer .btn.btn-social:hover {
-    color: var(--primary);
+    color: #ffc107;
 }
 
 .footer .btn.btn-link {
@@ -550,7 +554,7 @@
     top: 0;
     left: 0;
     z-index: 0; /* Arka plan en arkada */
-    border-radius: 0 0 3rem 3rem;
+    border-radius: 0 0 8rem 8rem;
 }
 
 
@@ -673,7 +677,7 @@
     width: 100%;
     transition: top 0.3s;
 }
-@media (min-width: 768px) {
+@media (min-width: 991px) {
     .buton-mobile {
         display: none;
     }
@@ -689,7 +693,7 @@
 }
 
 /* Optionally, you can adjust the background image for smaller screens */
-@media (max-width: 767px) {
+@media (max-width: 991px) {
     .background-image {
         background-size: cover;
         background-position: center;
@@ -724,4 +728,232 @@ color: #ffc107;
 }
 .buton-mobile{
     border-radius: 50%;
+}.room-item {
+    overflow: hidden; /* Taşmayı engellemek için */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    
+}
+
+.room-item img {
+    width: 100%;
+    height: 200px; /* Sabit yükseklik */
+    object-fit: cover; /* Resmin orantısız büyümesini engeller */
+}
+
+.room-item .p-4 {
+    overflow-y: auto; /* İçeriğin fazla olduğu durumlarda kaydırma çubuğu ekler */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.d-flex.flex-wrap {
+    flex-wrap: wrap; /* Tag'lerin düzgün sıralanması için */
+}
+
+.d-flex .border-end {
+    flex: 1 1 45%; /* Her tag'i kutudan taşmadan sıralar */
+    text-overflow: ellipsis; /* Çok uzun tag'lerde kesilme simgesi ekler */
+    white-space: nowrap; /* Tag'lerin bir satıra sığmasını sağlar */
+}
+
+.room-item .text-body {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Üç satır göster */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.room-item .btn-container {
+    position: absolute;
+    bottom: 20px; /* Butonları kutunun altına yerleştirir */
+    left: 50%;
+    transform: translateX(-50%); /* Ortalar */
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* Butonları aralıklı yapar */
+}
+
+.room-item .btnn {
+    width: 48%; /* Her butonun genişliğini 48% yapar */
+    background-color: black; /* Arka planı siyah yapar */
+    color: white; /* Yazıyı beyaz yapar */
+    text-align: center; /* Buton içeriğini ortalar */
+    padding: 10px; /* İçerik için biraz boşluk */
+    border: none; /* Kenarlıkları kaldırır */
+    transition: all 0.3s ease; /* Geçiş efekti */
+}
+
+.room-item .btnn:hover {
+    background-color:#ffc107; /* Hover durumunda arka planı beyaz yapar */
+    color: black; /* Yazıyı siyah yapar */
+    border: #000000 1px solid;
+    transition: all ease 0.5s;
+}
+@media (max-width: 1100px) {
+    .info-card{
+display: none;
+}
+}.service-img {
+    width: 100%; /* Görseli genişletir */
+    height: auto; /* Yüksekliği orantılı yapar */
+    border-radius: 50%; /* %50 yuvarlak köşe */
+}
+
+.service-icon {
+    overflow: hidden; /* Görsellerin dışarı taşmasını engeller */
+    border-radius: 50%; /* Dış border yuvarlak köşe */
+}
+
+.service-item {
+    display: block;
+    text-align: center;
+    position: relative;
+    border-radius: 15px; /* Servis kartlarına yuvarlatılmış köşeler */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hafif gölge efekti */
+}
+
+.service-item:hover .service-img {
+    transform: scale(1.05); /* Hover efekti ile görseli büyütme */
+    transition: transform 0.3s ease-in-out; /* Geçiş efekti */
+}
+.btn-footer {
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: .5s;
+    border: 1px solid #6C48C5;
+    border-radius:20px ;
+    cursor: pointer;
+    background-color: none; /* Arka planı siyah yapar */
+    color: #FFFFFF;
+}
+
+/* Navbar için mobil düzenlemeler */
+.navbar {
+    position: relative; /* fixed yerine relative */
+    padding: 1rem;
+}
+
+/* Mobil menü butonu */
+.navbar-toggler {
+    display: none; /* Varsayılan olarak gizli */
+    background: transparent;
+    border: 1px solid #fff;
+    padding: 0.5rem;
+}
+
+/* Mobil menü içeriği */
+.navbar-collapse {
+    display: flex;
+}
+
+/* Responsive breakpoint */
+@media (max-width: 768px) {
+    .navbar-toggler {
+        display: block;
+    }
+
+    .navbar-collapse {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        padding: 1rem;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .navbar-collapse.show {
+        display: block;
+    }
+
+    .navbar-nav {
+        flex-direction: column;
+    }
+
+    .nav-item {
+        margin: 0.5rem 0;
+    }
+}
+
+/* Hero section responsive düzenlemeler */
+.hero-section {
+    padding: 4rem 2rem;
+    position: relative;
+}
+
+/* Metin boyutları */
+.hero-text h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+}
+
+.hero-text p {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Search bar düzenlemesi */
+.search-bar {
+    width: 100%;
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+    .hero-text h1 {
+        font-size: 2rem;
+    }
+
+    .hero-text p {
+        font-size: 0.9rem;
+    }
+
+    .search-bar {
+        padding: 0.8rem;
+    }
+
+    .search-input {
+        font-size: 0.9rem;
+    }
+
+    .search-button {
+        padding: 0.5rem 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-text h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero-section {
+        padding: 2rem 1rem;
+    }
+
+    .search-bar {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .search-input,
+    .search-button {
+        width: 100%;
+    }
+}
+
+.phone-link {
+    transition: color 0.3s ease;
+}
+
+.phone-link:hover {
+    color: #ffc107 !important; /* Bootstrap'in orange rengi */
 }
