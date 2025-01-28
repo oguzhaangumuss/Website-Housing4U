@@ -186,10 +186,7 @@
 
 
 
-.input-group-wrapper{
-    
-    width: 50%;
-}
+
 
 
 
@@ -616,11 +613,7 @@
 }
 
 /* Başlık */
-#start-label {
-    font-size: clamp(1rem, 10vmin, 6rem);
-    font-family: sans-serif;
-    color: hsl(0 0% 98%);
-}
+
 
 .underlined {
     position: relative;
@@ -883,10 +876,7 @@ display: none;
 }
 
 /* Hero section responsive düzenlemeler */
-.hero-section {
-    padding: 4rem 2rem;
-    position: relative;
-}
+
 
 /* Metin boyutları */
 .hero-text h1 {
@@ -935,9 +925,7 @@ display: none;
         font-size: 1.5rem;
     }
 
-    .hero-section {
-        padding: 2rem 1rem;
-    }
+    
 
     .search-bar {
         flex-direction: column;
